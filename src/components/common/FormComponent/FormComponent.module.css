@@ -1,0 +1,15 @@
+.formControl {
+  margin-bottom: 25px;
+}
+
+.error input,
+.error textarea {
+  border: 2px solid #d73434;
+  display: block;
+}
+
+.error span{
+  color: #d73434;
+  font-size: 14px;
+  font-style: italic;
+}

@@ -1,0 +1,19 @@
+.paginator {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.paginator span {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.paginator span:hover {
+  color: blue;
+}
+
+.activePage {
+  font-weight: bold;
+  font-size: 20px;
+}

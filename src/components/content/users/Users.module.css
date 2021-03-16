@@ -1,0 +1,16 @@
+.container {
+  width: 50%;
+}
+
+.button {
+  cursor: pointer;
+  background-color: #bec9d4;
+  text-align: center;
+  padding: 5px;
+  width: 100px;
+  margin: 0 auto;
+}
+
+.button:hover {
+  color: white;
+}

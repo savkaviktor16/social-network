@@ -1,0 +1,17 @@
+.container {
+  padding: 20px;
+}
+
+.container ul > li {
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+
+.container a {
+  text-decoration: none;
+  color: black;
+}
+
+.container a.active {
+  color: #dc3d84;
+}

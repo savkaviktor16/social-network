@@ -1,0 +1,68 @@
+.userItem {
+  margin-bottom: 10px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 25% 1fr;
+}
+
+.userInfo {
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.userImg {
+  padding: 10px;
+}
+
+.userImg img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.userInfo {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.userLocation {
+  text-align: right;
+  font-size: 14px;
+  font-style: italic;
+  color: lightslategray;
+}
+
+.userName {
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.userStatus {
+  font-style: italic;
+}
+
+.followLink {
+  cursor: pointer;
+  background-color: #bec9d4;
+  text-align: center;
+  padding: 5px;
+}
+
+.followLink:hover {
+  color: white;
+  background-color: #334252;
+}
+
+.noClick {
+  pointer-events: none;
+  background-color: #bec9d4;
+  text-align: center;
+  padding: 5px;
+}
+
+.noClick:hover {
+  color: white;
+  background-color: #7eaad9;
+}

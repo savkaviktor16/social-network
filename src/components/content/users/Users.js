@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Users.module.css';
 import UserItem from "./useritem/UserItem";
 import Preloader from "../../common/Preloader/Preloader";
-import ReactPaginate from 'react-paginate';
 import Pagination from "../../common/Pagination/Pagination";
 import {connect} from "react-redux";
 import {
@@ -14,6 +13,14 @@ import {
 } from "../../../redux/users-reducer";
 
 class Users extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFriend: '',
+      searchTerm: ''
+    };
+  }
+
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
@@ -23,8 +30,16 @@ class Users extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.currentPage !== this.props.currentPage) {
-      this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    if (prevProps.currentPage !== this.props.currentPage ||
+        prevState.searchTerm !== this.state.searchTerm ||
+        prevState.isFriend !== this.state.isFriend
+    ) {
+      this.props.getUsers(
+          this.props.currentPage,
+          this.props.pageSize,
+          this.state.searchTerm,
+          this.state.isFriend
+      );
     }
   }
 
@@ -32,6 +47,14 @@ class Users extends React.Component {
   // but troubles with debugging context "this" can happen
   setFollow = (userId, method) => {
     this.props.getFollow(userId, method);
+  }
+
+  isFriendCallback = (isFriend) => {
+    this.setState({isFriend})
+  }
+
+  searchTermCallback = (searchTerm) => {
+    this.setState({searchTerm})
   }
 
   render() {
@@ -51,23 +74,39 @@ class Users extends React.Component {
 
     return <div className={styles.container}>
       <Pagination {...this.props} />
-      {/*<ReactPaginate*/}
-      {/*    previousLabel={'previous'}*/}
-      {/*    nextLabel={'next'}*/}
-      {/*    breakLabel={'...'}*/}
-      {/*    breakClassName={'break-me'}*/}
-      {/*    pageCount={pageCount}*/}
-      {/*    marginPagesDisplayed={2}*/}
-      {/*    pageRangeDisplayed={5}*/}
-      {/*    onPageChange={this.handlePageClick}*/}
-      {/*    containerClassName={'pagination'}*/}
-      {/*    subContainerClassName={'pages pagination'}*/}
-      {/*    activeClassName={'active'}*/}
-      {/*/>*/}
+      <SearchForm searchTerm={this.state.searchTerm}
+                  isFriendParentCallback={this.isFriendCallback}
+                  searchTermParentCallback={this.searchTermCallback}
+                  isFriend={this.state.isFriend}
+      />
       {renderElement}
     </div>
   }
+}
 
+const SearchForm = ({searchTerm, searchTermParentCallback, isFriendParentCallback, isFriend}) => {
+  const handleChangeSearchText = (e) => {
+    searchTermParentCallback(e.target.value)
+  }
+
+  const handleChangeSelect = (e) => {
+    isFriendParentCallback(e.target.value);
+  }
+
+  return <div>
+    <input
+        type="text"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={handleChangeSearchText}
+    />
+
+    <select value={isFriend} onChange={handleChangeSelect}>
+      <option value="">All</option>
+      <option value="true">Followed</option>
+      <option value="false">Unfollowed</option>
+    </select>
+  </div>
 }
 
 let mapStateToProps = state => {

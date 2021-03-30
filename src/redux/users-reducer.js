@@ -56,20 +56,22 @@ export let setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage
 })
+
 export let setIsFetching = (isFetching) => ({
   type: TOGGLE_IS_FETCHING,
   isFetching
 })
+
 export let setIsFetchingFollow = (isFetchingFollow) => ({
   type: TOGGLE_IS_FETCHING_FOLLOW,
   isFetchingFollow
 })
 
 // Thunk
-export const getUsers = (currentPage, pageSize) => {
+export const getUsers = (currentPage, pageSize, searchTerm, isFriend) => {
   return async dispatch => {
     dispatch(setIsFetching(true));
-    let response = await userAPI.getUsersAPI(currentPage, pageSize);
+    let response = await userAPI.getUsersAPI(currentPage, pageSize, searchTerm, isFriend);
     dispatch(setUsers(response.items));
     dispatch(setTotalCount(response.totalCount));
     dispatch(setIsFetching(false));

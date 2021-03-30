@@ -25,7 +25,8 @@ const Pagination = (props) => {
     }
     {
       middlePages.map(
-          p => <span
+          (p, index) => <span
+              key={index}
               className={currentPage === p ? styles.activePage : 'undefined'}
               onClick={(e) => setCurrentPage(p)}>{p}</span>
       )
